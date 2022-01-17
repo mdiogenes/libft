@@ -13,7 +13,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	dst = (char *)malloc(sizeof (const char)*(sizes1 + sizes2));
 	if (dst == 0)
 		return(0);
-	lendst = ft_strlcat(dst, s1, (sizes1));
+	lendst = ft_strlcpy(dst, s1, (sizes1 + sizes2));
 	lendst = ft_strlcat(dst, s2, (sizes1 + sizes2));
 	return (dst);	
 }
