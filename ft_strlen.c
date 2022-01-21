@@ -6,13 +6,15 @@
 /*   By: msoler-e <msoler-e@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 09:51:34 by msoler-e          #+#    #+#             */
-/*   Updated: 2021/11/17 13:10:31 by msoler-e         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:00:03 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	int	cont;
-	int	i;
+	size_t	cont;
+	int		i;
 
 	i = 0;
 	if (str[i] == '\0')
@@ -20,7 +22,7 @@ int	ft_strlen(char *str)
 	cont = 0;
 	while (str[i] != '\0')
 	{
-		cont = cont + 1;
+		cont ++;
 		i++;
 	}
 	return (cont);

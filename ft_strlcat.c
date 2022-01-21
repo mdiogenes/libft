@@ -1,50 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   strlcat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 10:01:58 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/01/13 10:40:04 by msoler-e         ###   ########.fr       */
+/*   Created: 2022/01/19 10:38:02 by msoler-e          #+#    #+#             */
+/*   Updated: 2022/01/19 11:25:33 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, const char *src, size_t sizedstmem)
 {
-	int	cont;
-	int	i;
+	size_t	x;
+	size_t	y;
+	size_t	sizesrc;
+	size_t	sizedst;
+	char	*s;
 
-	i = 0;
-	if (str[i] == '\0')
-		return (0);
-	cont = 0;
-	while (str[i] != '\0')
-	{
-		cont = cont + 1;
-		i++;
-	}
-	return (cont);
-}
-
-unsigned int	ft_strlcat(char *dst, const char *src, unsigned int sizedstmem)
-{
-	unsigned int	x;
-	unsigned int	sizesrc;
-	unsigned int	sizedst;
-	char			*srcchar;
-
-	srcchar = (char *)src;
 	x = 0;
-	sizesrc = ft_strlen(srcchar);
+	s = (char *) src;
+	sizesrc = ft_strlen(src);
 	sizedst = ft_strlen(dst);
-	if ((sizedstmem - 1) <= sizesrc)
-		return (sizedst + sizedstmem);
-	while ((sizesrc + x) < sizedstmem)
+	y = sizedst;
+	if (sizedstmem == 0)
+		return (sizesrc);
+	if (sizedst < sizedstmem -1)
 	{
-		dst[sizedst + x] = src[x];
-		x ++;
-	}
-	dst[sizedst + x] = '\0';
+		while ((sizedst + x) < (sizedstmem - 1) && s[x] != '\0')
+		{
+			dst[y++] = s[x++];
+		}
+		dst[y] = '\0';
+	}	
+	if (sizedstmem <= sizedst)
+		return (sizesrc + sizedstmem);
 	return (sizesrc + sizedst);
 }

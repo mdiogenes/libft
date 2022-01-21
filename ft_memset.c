@@ -6,11 +6,12 @@
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 10:27:07 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/01/12 14:26:34 by msoler-e         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:05:27 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-void	*ft_memset(void *str, int charac, unsigned int n)
+void	*ft_memset(void *str, int charac, size_t n)
 {	
 	unsigned char	*ptr;
 

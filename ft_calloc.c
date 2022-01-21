@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 10:47:11 by msoler-e          #+#    #+#             */
-/*   Updated: 2022/01/13 15:54:36 by msoler-e         ###   ########.fr       */
+/*   Created: 2022/01/14 10:50:11 by msoler-e          #+#    #+#             */
+/*   Updated: 2022/01/21 12:43:04 by msoler-e         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	ft_tolower(int charac)
+void	*ft_calloc(size_t nitems, size_t size)
 {
-	if ((charac >= 65) && (charac <= 90))
-			charac = charac + 32;
-	return (charac);
+	void	*result;
+
+	result = (void *) malloc(nitems * size);
+	if (result == 0)
+		return (0);
+	ft_bzero (result, nitems * size);
+	return (result);
 }

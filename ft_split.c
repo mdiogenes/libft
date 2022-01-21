@@ -1,13 +1,21 @@
-
-#include "libft.h"
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msoler-e <msoler-e@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 12:32:24 by msoler-e          #+#    #+#             */
+/*   Updated: 2022/01/21 11:08:44 by msoler-e         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 
 static int	count_strings(const char *str, char c)
 {
-	int x;
-	int found;
-	//contem amb quantes strings hem de separar mirant
+	int	x;
+	int	found;
+
 	x = 0;
 	found = 0;
 	while (*str)
@@ -24,28 +32,39 @@ static int	count_strings(const char *str, char c)
 	return (x);
 }
 
-static char	*word_dup(const char *str, int start, int finish)
+static char	*copiastr(const char *str, int start, int finish)
 {
-	char	*word;
+	char	*dst;
 	int		i;
 
 	i = 0;
-	word = malloc((finish - start + 1) * sizeof(char));
+	dst = malloc(sizeof(char) * (finish - start + 1));
+	if (dst == 0)
+		return (0);
 	while (start < finish)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
+		dst[i++] = str[start++];
+	dst[i] = '\0';
+	return (dst);
 }
 
-char		**ft_split(char const *s, char c)
+char	**remem(char const *s, char c)
+{
+	char	**dst;
+
+	if (!s)
+		return (0);
+	dst = malloc(sizeof(char *) * (count_strings(s, c) + 1));
+	if (dst == 0)
+		return (0);
+	return (dst);
+}
+
+char	**omplim(const char *s, char c, char **split)
 {
 	size_t	i;
 	size_t	j;
 	int		index;
-	char	**split;
-	//contem amb quantes strings hem de separar la string s
-	if (!s || !(split = malloc((count_strings(s, c) + 1) * sizeof(char *))))
-		return (0);
+
 	i = 0;
 	j = 0;
 	index = -1;
@@ -53,15 +72,25 @@ char		**ft_split(char const *s, char c)
 	{
 		if (s[i] != c && index < 0)
 			index = i;
-		//ens afegeix tota la string separada pel delimitador
 		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
 		{
-			split[j++] = word_dup(s, index, i);
+			split[j] = copiastr(s, index, i);
+			j ++;
 			index = -1;
 		}
 		i++;
 	}
-	split[j] = "\0";
+	split[j] = (char *) '\0';
 	return (split);
 }
 
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+
+	if (!s)
+		return (0);
+	split = remem(s, c);
+	split = omplim(s, c, split);
+	return (split);
+}
